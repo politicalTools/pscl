@@ -148,7 +148,7 @@ readVotes <- function(file,
                  desc=desc,
                  source=file)
   if(twoParty)
-    orderPartyLevel(rc)
+    rc <- orderPartyLevel(rc)
   rc
 }
 
