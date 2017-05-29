@@ -1,5 +1,6 @@
 ## TODO: Define record type
 ## Texas Legislature Format
+
 txLege <- list(
   legCodePos = list(4,8),
   stateCodePos= list(9,10),
@@ -9,7 +10,6 @@ txLege <- list(
   legislatorNamePos = list(27,40),
   rollCallStartPos = 41
 )
-
 ## Keith Poole and Howard Rosenthal format
 KH <- list(
   legCodePos = list(4,8),
@@ -37,11 +37,11 @@ readVotes <- function(file,
                    ){
 
   if(!is.null(format))
-    fmt = format
+    fmt <- format
   else if(!is.null(formatName))
-    fmt = eval(parse(text = formatName ))
+    fmt <- getElement(formatName)
   else
-    fmt = KH
+    fmt <- get('KH')
 
   cat("Attempting to read file in Keith Poole/Howard Rosenthal (KH) format.\n")
   warnLevel <- options()$warn
@@ -98,7 +98,7 @@ readVotes <- function(file,
   stateAbb <- state.abb[match(stateName,state.name)]  ## convert to abbrev
   stateAbb[grep(KHstateName,pattern="^USA")] <- "USA"  ## for presidents
 
-  cd <- as.numeric(substring(data,fmt$distrctPos[1], fmt$districtPos[2]))
+  cd <- as.numeric(substring(data,fmt$districtPos[1], fmt$districtPos[2]))
   cdChar <- as.character(cd)
   cdChar[cd==0] <- ""
 
