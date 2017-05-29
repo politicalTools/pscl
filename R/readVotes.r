@@ -23,23 +23,23 @@ KH <- list(
 
 ## read  formatted data
 readVotes <- function(file,
-                   dtl=NULL,
-                   yea=c(1,2,3),
-                   nay=c(4,5,6),
-                   missing=c(7,8,9),
-                   notInLegis=0,
-                   desc=NULL,
-                   debug=FALSE,
-                   formatName=NULL,
-                   format=NULL,
-                   test=1000000L,
-                   twoParty=FALSE
-                   ){
+                      dtl=NULL,
+                      yea=c(1,2,3),
+                      nay=c(4,5,6),
+                      missing=c(7,8,9),
+                      notInLegis=0,
+                      desc=NULL,
+                      debug=FALSE,
+                      formatName=NULL,
+                      format=NULL,
+                      test=1000000L,
+                      twoParty=FALSE
+){
 
   if(!is.null(format))
     fmt <- format
   else if(!is.null(formatName))
-    fmt <- getElement(formatName)
+    fmt <- get(formatName)
   else
     fmt <- get('KH')
 
@@ -300,7 +300,7 @@ orderPartyLevel <- function(rc, ...){ ### Order party levels so the correct colo
       factor(
         rc$legis.data$party, levels = c(levels(rc$legis.data$party), "X")
       ),
-    "X"),
-  "R")
+      "X"),
+    "R")
   rc
 }
