@@ -32,7 +32,8 @@ readVotes <- function(file,
                    debug=FALSE,
                    formatName=NULL,
                    format=NULL,
-                   test=1000000L
+                   test=1000000L,
+                   twoParty=FALSE
                    ){
 
   if(!is.null(format))
@@ -146,6 +147,8 @@ readVotes <- function(file,
                  vote.data=vote.data,
                  desc=desc,
                  source=file)
+  if(twoParty)
+    orderPartyLevel(rc)
   rc
 }
 
@@ -289,4 +292,15 @@ dtlParser <- function(file,debug=TRUE){
   }
 
   out
+}
+
+orderPartyLevel <- function(rc, ...){ ### Order party levels so the correct color is returned from rainbow()
+  rc$legis.data$party <- relevel(
+    relevel(
+      factor(
+        rc$legis.data$party, levels = c(levels(rc$legis.data$party), "X")
+      ),
+    "X"),
+  "R")
+  rc
 }
